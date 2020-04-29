@@ -65,6 +65,7 @@ const cardArray=[
 ]
 
 const grid= document.querySelector('.grid');
+const resultDisplay-document.querySelector('#result')
 var cardsChosen=[];
 var cardsChosenId=[];
 var cardsWon=[];
@@ -82,7 +83,27 @@ function createBoard(){
 //check for matches
 function checkForMath(){
     var cards= document.querySelectorAll('img')
-    const optionOneId=cardsChosenId
+    const optionOneId=cardsChosenId[0]
+    const optionTwoId=cardsChosenId[1]
+
+    if (cardsChosen[0]===cardsChosen[1]){
+        alert('you found a match')
+        cards[optionOneId].setAttribute('src', 'images/white.png')
+        cards[optionTwoId].setAttribute('src', 'images/white.png')
+        cardsWon.push(cardsChosen)
+    }
+    else{
+        cards[optionOneId].setAttribute('src', 'images/black.png')
+        cards[optionTwoId].setAttribute('src', 'images/black.png')
+        alert('sorry, try it again')
+    }
+    cardsChosen=[]
+    cardsChosenId=[]
+    resultDisplay.textContent=cardsWon.length
+
+    if(cardsWon.length=== cardArray.length/2){
+        resultDisplay.textContent='congratulations'
+    }
 }
 
 
