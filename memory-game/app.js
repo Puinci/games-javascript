@@ -64,8 +64,10 @@ const cardArray=[
     }
 ]
 
+cardArray.sort(()=>0.5-Math.random());
+
 const grid= document.querySelector('.grid');
-const resultDisplay-document.querySelector('#result')
+const resultDisplay=document.querySelector('#result')
 var cardsChosen=[];
 var cardsChosenId=[];
 var cardsWon=[];
@@ -75,7 +77,7 @@ function createBoard(){
         var card=document.createElement('img')
         card.setAttribute('src','images/blank.png')
         card.setAttribute('data-id',i)
-        card.addEventListener('click',flipcard)
+        //card.addEventListener('click',flipcard)
         grid.appendChild(card)
     }
 }
@@ -93,8 +95,8 @@ function checkForMath(){
         cardsWon.push(cardsChosen)
     }
     else{
-        cards[optionOneId].setAttribute('src', 'images/black.png')
-        cards[optionTwoId].setAttribute('src', 'images/black.png')
+        cards[optionOneId].setAttribute('src', 'images/blank.png')
+        cards[optionTwoId].setAttribute('src', 'images/blank.png')
         alert('sorry, try it again')
     }
     cardsChosen=[]
@@ -110,10 +112,9 @@ function checkForMath(){
 //flip your card
 function flipCard(){
     var cardId=this.getAttribute('data-id')
-    cardsChosen.push(cardId)
-    this.setAttribute('src', cardArray[cardId].name)
+    cardsChosen.push(cardArray[cardId].name)
     cardsChosenId.push(cardId)
-    this.setAttribute('src',cardArray[cardId].img)
+    this.setAttribute('src', cardArray[cardId].img)
     if(cardsChosen.length ===2){
         setTimeout(checkForMath,500)
     }
