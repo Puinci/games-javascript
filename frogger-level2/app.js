@@ -175,6 +175,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  
+ //rules for frog to win
+ function win() {
+    if (squares[4].classList.contains('frog')) {
+      result.innerHTML = 'You WON'
+      squares[currentIndex].classList.remove('frog')
+      clearInterval(timerId)
+      document.removeEventListener('keyup', moveFrog)
+    }
+  }
 
+  //rules for frog to lose
+  function lose() {
+    if ((currentTime === 0 ) || (squares[currentIndex].classList.contains('c1')) 
+    || (squares[currentIndex].classList.contains('l5'))
+    || (squares[currentIndex].classList.contains('l4'))
+    ) {
+      result.innerHTML = 'You LOSE'
+      squares[currentIndex].classList.remove('frog')
+      clearInterval(timerId)
+      document.removeEventListener('keyup', moveFrog)
+    }
+  }
+    
+  //all the functions that move pieces
+  function movePieces() {
+    currentTime--
+    timeLeft.textContent = currentTime
+    autoMoveCars()
+    autoMoveLogs()
+    moveWithLogLeft()
+    moveWithLogRight()
+    lose()
+  }
+
+  //to start, and pause the game
+  startBtn.addEventListener('click', () => {
+    if(timerId) {
+      clearInterval(timerId)
+    } else {
+      timerId = setInterval(movePieces, 1000)
+      document.addEventListener('keyup', moveFrog)
+    }
+  })
 })
